@@ -1,0 +1,32 @@
+{
+  "name": "bytic/cookie",
+  "type": "library",
+  "description": "Php Framework",
+  "homepage": "https://github.com/bytic/cookie",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Nip\\Cookie\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nip\\Cookie\\Tests\\": "tests/",
+      "Nip\\Cookie\\Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.3",
+    "phpunit/phpunit": "^7.2",
+    "mockery/mockery": "^1.1"
+  }
+}
