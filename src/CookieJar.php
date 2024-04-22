@@ -44,6 +44,15 @@ class CookieJar
         $this->initDefaults();
     }
 
+    /**
+     * @return Cookie
+     * @deprecated use make
+     */
+    public function newCookie($name = null, $value = null)
+    {
+        $name = $name ?: 'cookie' . microtime();
+        return $this->make($name, $value);
+    }
 
     /**
      * Create a new cookie instance.

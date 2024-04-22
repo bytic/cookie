@@ -8,14 +8,7 @@ use function Bytic\Cookie\cookieJar;
 
 class Jar extends \Bytic\Cookie\CookieJar
 {
-    /**
-     * @return Cookie
-     * @deprecated use make
-     */
-    public function newCookie($name, $value)
-    {
-        return $this->make($name, $value);
-    }
+
 
     /**
      * Singleton.
