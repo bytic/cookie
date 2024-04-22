@@ -2,6 +2,10 @@
 
 namespace Nip\Cookie;
 
+use Bytic\Cookie\CookieJar;
+
+use function Bytic\Cookie\cookieJar;
+
 class Jar extends \Bytic\Cookie\CookieJar
 {
     /**
@@ -16,14 +20,10 @@ class Jar extends \Bytic\Cookie\CookieJar
     /**
      * Singleton.
      *
-     * @return self
+     * @return CookieJar
      */
     public static function instance()
     {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
+        return cookieJar();
     }
 }
