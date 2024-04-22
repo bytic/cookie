@@ -12,8 +12,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "Nip\\Cookie\\": "src"
-    }
+      "Nip\\Cookie\\": "legacy",
+      "Bytic\\Cookie\\": "src"
+    },
+    "files": [
+    ]
   },
   "autoload-dev": {
     "psr-4": {

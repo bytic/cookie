@@ -1,91 +1,58 @@
 <?php
 
-namespace Nip\Cookie;
+namespace Bytic\Cookie;
 
-class Cookie
+class Cookie extends \Symfony\Component\HttpFoundation\Cookie
 {
-    protected $name;
-    protected $value;
-    protected $expires;
-    protected $expiresTimer;
-    protected $domain;
-    protected $path = '/';
-    protected $secure;
-
-    public function setName($name)
-    {
-        if ($name) {
-            if (!preg_match("/[=,; \t\r\n\013\014]/", $name)) {
-                $this->name = $name;
-            }
-        }
-
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setValue($value)
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setValue($value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function setDomain($domain)
+    /**
+     * @param $domain
+     * @return $this
+     */
+    public function setDomain($domain): self
     {
         $this->domain = $domain;
 
         return $this;
     }
 
-    public function getDomain()
-    {
-        return $this->domain;
-    }
-
-    public function setPath($path)
+    public function setPath($path): self
     {
         $this->path = $path;
 
         return $this;
     }
 
-    public function getPath()
+    public function setExpire($expire)
     {
-        return $this->path;
-    }
-
-    public function setExpire($expires)
-    {
-        $this->expires = $expires;
+        $this->expire = $expire;
 
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getExpire()
     {
-        return $this->expires;
+        return $this->getExpiresTime();
     }
 
     public function setExpireTimer($expires)
     {
-        $this->expiresTimer = $expires;
+        $this->expire = time() + $expires;
 
         return $this;
-    }
-
-    public function getExpireTimer()
-    {
-        return $this->expiresTimer;
     }
 
     public function setSecured($secured)
@@ -95,33 +62,29 @@ class Cookie
         return $this;
     }
 
-    public function isSecure()
+    /**
+     * @return bool
+     */
+    public function isExpired(): bool
     {
-        return (bool) $this->secure;
-    }
-
-    public function isExpired()
-    {
-        if (is_int($this->expires) && $this->expires < time()) {
+        if (is_int($this->expire) && $this->expire < time()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function save()
+    /**
+     * @return bool
+     */
+    public function save(): bool
     {
-        $expire = $this->getExpire();
-        if (!$expire) {
-            $timer = $this->getExpireTimer() ? $this->getExpireTimer() : 3 * 60 * 60;
-            $expire = time() + $timer;
-        }
         $domain = ($this->getDomain() != 'localhost') ? $this->getDomain() : false;
 
         return setcookie(
                 $this->getName(),
                 $this->getValue(),
-                $expire,
+                $this->getExpire(),
                 $this->getPath(),
                 $domain,
                 $this->isSecure());
