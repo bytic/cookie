@@ -46,7 +46,7 @@ class CookieJar
 
     /**
      * @return Cookie
-     * @deprecated use make
+     * @deprecated use make with proper name
      */
     public function newCookie($name = null, $value = null)
     {

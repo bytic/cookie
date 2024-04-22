@@ -4,6 +4,12 @@ namespace Bytic\Cookie;
 
 class Cookie extends \Symfony\Component\HttpFoundation\Cookie
 {
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     /**
      * @param $value
      * @return $this
@@ -82,11 +88,12 @@ class Cookie extends \Symfony\Component\HttpFoundation\Cookie
         $domain = ($this->getDomain() != 'localhost') ? $this->getDomain() : false;
 
         return setcookie(
-                $this->getName(),
-                $this->getValue(),
-                $this->getExpire(),
-                $this->getPath(),
-                $domain,
-                $this->isSecure());
+            $this->getName(),
+            $this->getValue(),
+            $this->getExpire(),
+            $this->getPath(),
+            $domain,
+            $this->isSecure()
+        );
     }
 }
