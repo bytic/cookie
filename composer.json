@@ -16,6 +16,7 @@
       "Bytic\\Cookie\\": "src"
     },
     "files": [
+        "src/functions.php"
     ]
   },
   "autoload-dev": {
